@@ -1,0 +1,31 @@
+<ul class="pagination">
+
+    <li>Rows per page: </li>
+
+    <li class="input-field">
+
+        <select class="browser-default" ng-model="vm.controller.query.limit"
+                ng-change="vm.controller.setDataOnStartPage(); vm.controller.collapseCollapsible()">
+
+            <option value="50">50</option>
+
+            <option value="100">100</option>
+
+            <option value="150">150</option>
+
+        </select>
+
+    </li>
+
+
+    <li>{{vm.controller.query.page}} - {{vm.controller.query.lastPageNo | number:0}}</li>
+
+    <li class="waves-effect"><i style="font-size: 19px" class="material-icons" ng-click="vm.controller.setDataOnStartPage(); vm.controller.collapseCollapsible();">skip_previous</i></li>
+
+    <li class="waves-effect"><i style="font-size: 19px" class="material-icons" ng-click="vm.controller.onPageChange('left'); vm.controller.collapseCollapsible();">chevron_left</i></li>
+
+    <li class="waves-effect"><i style="font-size: 19px" class="material-icons" ng-click="vm.controller.onPageChange('right'); vm.controller.collapseCollapsible();">chevron_right</i></li>
+
+    <li class="waves-effect"><i style="font-size: 19px" class="material-icons" ng-click="vm.controller.setDataOnEndPage(); vm.controller.collapseCollapsible();">skip_next</i></li>
+
+</ul>

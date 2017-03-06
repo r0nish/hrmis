@@ -1,0 +1,86 @@
+<div class="row custom-grid">
+
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+        <li style="padding-left: 15px;">
+            <div class="row">
+                <div class="input-field col s4">
+                    <input id="routeSearchField" type="text" class="validate"
+                           ng-model="vm.routeSearchText" name="route"
+                           ng-minlength="1" ng-maxlength="25" ng-pattern="/^[\w -]*$/" required>
+                    <label for="routeSearchField">Search Route</label>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="row no-margin"
+                 style="font-weight: 500; padding: 5px 1rem; border-bottom: 1px solid #ddd; line-height: 2.5rem;
+                        margin: 0 !important;">
+
+                <div class="col s4">
+                    Route
+                </div>
+
+                <div class="col s4">
+                    DSE
+                </div>
+
+                <!--<div class="col s12" style="display: flex; justify-content: center">
+
+                    <div class="input-field col s4" style="margin-left: initial">
+                        <input id="skuSearchField" type="text" class="validate"
+                               ng-model="vm.skuSearchText" name="title">
+                        <label for="skuSearchField">SKU</label>
+                    </div>
+
+                </div>-->
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="route in  vm.routeList | filter : vm.routeSearchText ">
+
+            <div class="collapsible-header">
+
+                <div class="col s4">
+                    {{route.title}}
+                </div>
+
+                <div class="col s4">
+                    {{route.user_name}}
+                </div>
+
+                <div class=" col s2 modal-wrapper">
+
+                    <a class=" modal-trigger" data-target="assignRoute-{{route.id_route}}"
+                       ng-click="vm.controller.setDialogDataToChangeRoute(route,$event)">
+                        Assign DSE
+                    </a>
+
+                    <!-- Modal Structure -->
+                    <div id="assignRoute-{{route.id_route}}" class="modal dialog-box-element">
+                        <div ng-include=" 'app/configurations/user/userAccount/userDetail/edit-user-route-assignment.tmpl.html' "></div>
+                    </div>
+
+                </div>
+
+                <div ng-if="route.user_id != null" class=" col s2 modal-wrapper">
+
+                    <a ng-click="vm.controller.deleteDSEforRoute(route,$event)">
+                        Delete DSE
+                    </a>
+
+                    <!-- Modal Structure -->
+                    <!--<div id="deleteRoute-{{route.id_route}}" class="modal dialog-box-element">
+                        <div ng-include=" 'app/configurations/skuPrice/edit-sku-price-form.tmpl.html' "></div>
+                    </div>-->
+
+                </div>
+
+            </div>
+
+        </li>
+    </ul>
+
+</div>
+

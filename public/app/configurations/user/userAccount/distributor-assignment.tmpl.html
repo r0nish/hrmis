@@ -1,0 +1,34 @@
+<div class="modal-content">
+
+    <div>
+        <h2>Assign Distributors</h2>
+    </div>
+
+    <div>
+        <form name="taskForm" novalidate>
+
+            <ul sly-prevent-evaluation-when-hidden>
+                <li bindonce sly-repeat="distributorUser in vm.distributor">
+
+                    <p>
+                        <input type="checkbox" class="filled-in"
+                               id="{{user.id_user}}-distributor-{{distributorUser.id_distributor}}"
+                               ng-click="vm.toggleCheckbox(distributorUser, vm.selectedDistributor)"
+                               ng-checked="vm.isCheckboxChecked(distributorUser, vm.selectedDistributor)"/>
+                        <label for="{{user.id_user}}-distributor-{{distributorUser.id_distributor}}">{{distributorUser.title}}</label>
+                    </p>
+
+                </li>
+            </ul>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn-flat "
+       ng-click="vm.assignDistributor(vm.objectList.indexOf(user))">OK</a>
+    <a ng-click="vm.resetCheckedList()" class="modal-action modal-close waves-effect btn-flat ">Cancel</a>
+</div>

@@ -1,0 +1,125 @@
+<div class="modal-content">
+
+    <div>
+        <h2>Create User Location</h2>
+    </div>
+
+    <div>
+        <form name="taskForm" novalidate>
+
+            <div class="row">
+                <label>User Group</label>
+
+                <!--<select class="browser-default" material-select ng-model="vm.item.id_user_group"
+                        ng-change="vm.setUserGroupId(vm.item.id_user_group); vm.getHierarchyListUnderUserGroup(vm.item.id_user_group)"
+                        name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="group in vm.userGroups" value="{{group.id_user_group}}">
+                        {{group.group_name}}
+                    </option>
+                </select>-->
+
+                <select class="browser-default"
+                        ng-options="group.id_user_group as group.group_name for group in vm.userGroups"
+                        ng-change="vm.setUserGroupId(vm.item.id_user_group); vm.getHierarchyListUnderUserGroup(vm.item.id_user_group)"
+                        ng-model="vm.item.id_user_group" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+            <!--for DSE display the list of distributor-->
+            <div class="row" ng-if="vm.showDistributorList">
+                <label>Distributor</label>
+                <!--<select class="browser-default" material-select ng-model="vm.selectedDistributor"
+                        ng-change="vm.getUserUnderDistributor(vm.selectedDistributor); vm.getRoutesUnderDistributor(vm.selectedDistributor)"
+                        name="task">
+                    <option value=" " disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="distributor in  vm.distributorList" value="{{distributor}}">
+                        {{distributor.title}}
+                    </option>
+                </select>-->
+
+                <select class="browser-default"
+                        ng-options="distributor as distributor.title for distributor in  vm.distributorList"
+                        ng-change="vm.getUserUnderDistributor(vm.selectedDistributor); vm.getRoutesUnderDistributor(vm.selectedDistributor)"
+                        ng-model="vm.selectedDistributor" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+            <!--fetch the parent user lst-->
+            <div class="row" ng-if="vm.showParentUserList">
+                <label>Parent User</label>
+                <!--<select class="browser-default" material-select ng-model="vm.selectedParentUser"
+                        ng-change="vm.getGeoGraphicAssociationUnderUser(vm.selectedParentUser);vm.getUsersUnderListUnderUser(vm.selectedParentUser)"
+                        name="zm">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="parentUser in  vm.parentUserList" value="{{parentUser}}">
+                        {{parentUser.title}}
+                    </option>
+
+                </select>-->
+
+                <select class="browser-default"
+                        ng-options="parentUser as parentUser.title for parentUser in  vm.parentUserList"
+                        ng-change="vm.getGeoGraphicAssociationUnderUser(vm.selectedParentUser);vm.getUserListUnderUser(vm.selectedParentUser)"
+                        ng-model="vm.selectedParentUser" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+
+            <div class="row">
+                <label>User</label>
+                <!--<select class="browser-default" material-select ng-model="vm.selectedUser"
+                        ng-change="vm.setUserId(vm.selectedUser)" name="user">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="user in  vm.users" value="{{user}}">
+                        {{user.title}}
+                    </option>
+                </select>-->
+
+                <select class="browser-default"
+                        ng-options="user as user.title for user in  vm.users"
+                        ng-change="vm.setUserId(vm.selectedUser)"
+                        ng-model="vm.selectedUser" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <label ng-if="!vm.showDistributorList">Geographic Location </label>
+                <label ng-if="vm.showDistributorList">Route</label>
+
+                <!--<select class="browser-default" material-select ng-model="vm.selectedGeoAssociation"
+                        ng-change="vm.setGeoAssociationId(vm.selectedGeoAssociation)" name="user">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="geoAssociation in  vm.geoAssociationList"
+                            value="{{geoAssociation}}">
+                        {{geoAssociation.title}}
+                    </option>
+                </select>-->
+
+                <select class="browser-default"
+                        ng-options="geoAssociation as geoAssociation.title for geoAssociation in  vm.geoAssociationList"
+                        ng-change="vm.setGeoAssociationId(vm.selectedGeoAssociation)"
+                        ng-model="vm.selectedGeoAssociation" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat "
+       ng-click="vm.hide(vm.item)">OK</a>
+    <a ng-click="vm.resetDialogData()" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+.top-nav.custom-primary-color{
+    background-color: #6366de !important;
+}
+
+
+.badge.custom-primary-color{
+    background-color: #6366de !important;
+}
+
+.card-header-bar{
+    background-color: #6366de !important;
+}
+
+.waves-effect.custom-primary-color{
+    background-color: #6366de !important;
+}
+
+.side-nav{
+    background-color: transparent;
+}
+
+
+.side-nav .collapsible-body, .side-nav.fixed .collapsible-body{
+    background-color: transparent;
+}
+
+#rosia-container {
+    padding-top: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    overflow: auto;
+    background: #ffffff;
+}
+
+#slide-out{
+    background-color: #ffffff !important;
+}
+

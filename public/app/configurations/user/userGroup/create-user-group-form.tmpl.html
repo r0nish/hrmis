@@ -1,0 +1,38 @@
+<div class="modal-content">
+
+    <div>
+        <h2>Create User Group</h2>
+    </div>
+
+    <div>
+        <form name="taskForm" novalidate>
+
+            <div class="row">
+                <div class="input-field">
+                    <input id="group_name" type="text" class="validate"
+                           ng-model="vm.item.group_name" name="group_name"
+                           ng-minlength="3" ng-maxlength="25" ng-pattern="/^[\w -]*$/" required>
+                    <label for="group_name">Group Name</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <label>Parent Group ID</label>
+                <select class="browser-default" material-select
+                        ng-options="group.id_user_group as group.group_name for group in vm.usersGroupParent"
+                        ng-model="vm.item.parent_group_id" name="task">
+                    <option value="" disabled selected>Choose an option</option>
+                    <option value="0">null</option>
+                </select>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn-flat "
+       ng-click="vm.controller.addOrEdit(vm.objectList.indexOf(userGroup))">OK</a>
+    <a ng-click="vm.resetDialogData()" class="modal-action modal-close waves-effect btn-flat ">Cancel</a>
+</div>

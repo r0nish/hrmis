@@ -1,0 +1,127 @@
+<div class="row">
+    <div class="col s12 no-padding">
+        <div class="card black-text">
+            <div class="card-header-bar custom-primary-color red darken-2 white-text">
+                <h2>Password</h2>
+            </div>
+            <div class="card-content">
+
+                <div class="row">
+                    <div class="input-field col s6" style="justify-content: center">
+                        <input type="password" id="password" type="text" class="validate"
+                               ng-model="vm.userPassword" name="password"
+                               ng-minlength="5" ng-maxlength="25" required>
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+                <!--                    <div class="row">
+                                        <div class="input-field col s6" style="justify-content: center">
+                                            <input type="password" id="passwordConfirmation" type="text" class="validate"
+                                                   ng-model="vm.userPassword" name="password">
+                                            <label for="passwordConfirmation">Confirm Password</label>
+                                        </div>
+                                    </div>-->
+
+                <div>
+                    <a ng-click="vm.controller.changePassword(vm.userId)" class="waves-effect waves-light btn">Change
+                        Password</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<div class="container">
+    <div layout="row" layout-md="column" layout-sm="column">
+
+        <md-card flex="100" style="margin: 15px 5px 15px 5px">
+            <md-toolbar class="toolbar-default" flex layout="row">
+
+                <div class="md-toolbar-tools" flex="90" flex-sm="80">
+                    <h3>
+                        <span>{{vm.user.first_name}} {{vm.user.last_name}}</span>
+                    </h3>
+                </div>
+
+                <div flex="10" flex-sm="20" style="display: flex; justify-content: center">
+                    <md-menu>
+                        <md-button class="md-icon-button" aria-label="open menu"
+                                   ng-click="$mdOpenMenu()">
+                            <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button
+                                        ng-click="vm.controller.changePassword(vm.user,$event)">
+                                    <md-icon
+                                            md-font-icon="zmdi zmdi-settings"></md-icon>
+                                    Change Password
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+
+                </div>
+
+            </md-toolbar>
+
+&lt;!&ndash;            <md-card-content class="md-whiteframe-z2 padding-top-0"  style="margin: 10px 5px 10px 5px">
+                <div layout="column" layout-md="column" layout-sm="column" layout-margin>
+                    <h3 style="border-bottom: 1px solid grey">Details</h3>
+                    <div flex="50" style="margin-top: 15px;">
+                        <ul>
+                            <li>Email</li>
+                            <li><b> {{vm.user.email}}</b></li>
+                            <br/>
+                            <li>Mobile Number</li>
+                            <li><b>{{vm.user.mobile_number}}</b></li>
+                            <br/>
+                            <li>User Group Title</li>
+                            <li><b>{{vm.user.user_group.group_name}}</b></li>
+                            <br/>
+                        </ul>
+                    </div>
+                </div>
+            </md-card-content>&ndash;&gt;
+
+&lt;!&ndash;            <md-card-content>
+                <div>{{ vm.hierarchyList}}</div>
+
+            </md-card-content>&ndash;&gt;
+            <div class="md-whiteframe-z2 padding-bottom-10">
+
+                <md-data-table-container>
+                    <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                        <div ng-if = "vm.hierarchyList.length" style="vertical-align: top;" ng-repeat="element in vm.hierarchyList"
+                             class="md-whiteframe-z2" onload="element = element "
+                             ng-include=" 'app/configurations/user/userAccount/userDetail/user-detail-configuration-hierarchy-list.tmpl.html'">
+                        </div>
+                        &lt;!&ndash;<md-divider ng-repeat-end></md-divider>&ndash;&gt;
+                    </table>
+                </md-data-table-container>
+
+            </div>
+ &lt;!&ndash;           <div class="elements-icons md-whiteframe-z3 layout-column padding-top-10 padding-bottom-10">
+
+                <md-data-table-container>
+                    <table md-data-table class="md-primary md-data-table" md-progress="vm.deferred">
+                        <div style="vertical-align: top; margin: 10px 20px 10px 20px;" ng-if = "vm.hierarchyList.length"
+                             class="md-whiteframe-z2" ng-repeat= "user in businessUnit.users"
+                             onload="element = vm.hierarchyList[0]"
+                             ng-include=" 'app/sales/salesForce/sales-force-list.tmpl.html '">
+                        </div>
+                    </table>
+                </md-data-table-container>
+
+            </div>&ndash;&gt;
+
+
+        </md-card>
+
+
+    </div>
+</div>-->

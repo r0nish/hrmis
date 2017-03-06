@@ -1,0 +1,27 @@
+<div class="modal-content">
+
+    <div>
+        <h2>Assign Users</h2>
+    </div>
+
+    <div>
+            <ul sly-prevent-evaluation-when-hidden>
+                <li bindonce sly-repeat="childUser in vm.users">
+
+                    <p>
+                        <input type="checkbox" class="filled-in" id="{{user.id_user}}-child-user-{{childUser.child_user_id}}"
+                               ng-click="vm.toggleCheckbox(childUser, vm.data)" ng-checked="vm.isCheckboxChecked(childUser, vm.data)" />
+                        <label for="{{user.id_user}}-child-user-{{childUser.child_user_id}}">{{childUser.title}}</label>
+                    </p>
+
+                </li>
+            </ul>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn-flat "
+       ng-click="vm.assignChildrenUsers(vm.objectList.indexOf(user))">OK</a>
+    <a ng-click="vm.resetCheckedData()" class="modal-action modal-close waves-effect btn-flat ">Cancel</a>
+</div>

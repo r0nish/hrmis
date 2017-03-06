@@ -1,0 +1,60 @@
+<div class="row custom-grid">
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+        <li>
+            <div class="row grid-header-bar no-margin">
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('town_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'town_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Town</span>
+                </div>
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('route_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'route_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Route</span>
+                </div>
+
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('user_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'user_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>DSE</span>
+                </div>
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('retail_outlet_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'retail_outlet_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Retail Outlets</span>
+                </div>
+
+                <!--<div class="col s1 halign-wrapper valign-wrapper no-margin">
+                    <i style="display: inline-block; padding: 5px; border-radius: 50%;"
+                       class="tiny material-icons dropdown-button"
+                       ng-click="vm.downloadData();">file_download</i>
+                </div>-->
+
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="offlineCall in vm.objectList">
+            <div class="collapsible-header" style="cursor: auto">
+                <div class="row collapsible-header-content">
+                    <div class="col s3 no-margin" >
+                        {{offlineCall.town_title}}
+                    </div>
+                    <div class="col s3 no-margin" >
+                        {{offlineCall.route_title}}
+                    </div>
+                    <div class="col s3 no-margin" >
+                        {{offlineCall.user_title}}
+                    </div>
+                    <div class="col s3 no-margin" >
+                        {{offlineCall.retail_outlet_title}}
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+        </li>
+
+    </ul>
+</div>

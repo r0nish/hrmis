@@ -1,0 +1,859 @@
+/************
+ * Typography
+ ************/
+
+@font-face {
+    font-family: "Roboto";
+    src: url("https://fonts.googleapis.com/css?family=Roboto:400,100,500,700,700italic") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+Use for highligted Numbers and statistics only
+*/
+h1 {
+    font-size: 94px;
+    font-family: Roboto, Lato, Roboto, "Helvetica Neue", sans-serif;}
+
+/*
+Use as Card Title
+*/
+h2 {
+    font-size: 24px;
+    font-family: Roboto;
+}
+
+/*
+Use For Page Title and Normal Paragraph Text
+*/
+h3, p {
+    font-size: 20px !important;
+    font-family: Roboto;
+}
+
+/*
+Use for Form Values and Faq Questions
+*/
+h4 {
+    font-size: 14px;
+    font-family: Roboto;
+}
+
+/*
+Use for Table Heading.
+*/
+h5 {
+    font-size: 13px;
+    font-family: Roboto;
+}
+
+/**
+* Use for Captions, Form Labels
+*/
+h6 {
+    font-size: 12px;
+    font-family: Roboto;
+    font-weight: 400;
+    padding: 0px;
+}
+
+table[md-data-table] > tbody > tr > td {
+    font-size: 12px;
+    font-family: Roboto;
+}
+
+table[md-data-table] > thead:not([md-table-progress]) > tr > th {
+    font-size: 13px;
+    white-space: nowrap;
+    font-family: Roboto;
+    /*
+    font-style: italic;
+    */
+}
+
+table[md-data-table]:not([md-row-select]) > tbody > tr > td:first-child, table[md-data-table]:not([md-row-select]) > tfoot > tr > td:first-child, table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:first-child {
+    padding-left: 40px;
+}
+
+tbody {
+    background-color: #FAFAFA;
+}
+
+thead {
+    border-bottom: 3px solid #EEEEEE;
+}
+
+table[md-data-table] > tbody > tr > td.menu-setting-row {
+    text-align: right;
+}
+
+td md-switch {
+    margin: 5px;
+}
+
+.table-menu-badge {
+    display: inline-block;
+    text-align: center;
+    /* position: absolute; */
+    height: 2rem;
+    width: 2rem;
+    /* right: 0.2rem; */
+    /* top: 0.8rem; */
+    line-height: 2rem;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 13px;
+    float: right;
+    position: absolute;
+    top: 6px;
+    right: 0px;
+}
+
+.highlight {
+    background: #E0E0E0;
+}
+
+.numeric-value {
+    text-align: center;
+    font-weight: bold;
+}
+
+.table-action-row {
+    display: inline-block;
+    width: 100%;
+    box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.84);
+    background-color: #F5F5F5;
+    text-align: right;
+}
+
+.bg-overlay {
+    width: 100%;
+    /*    width: 1000px;
+        height: 700px;
+        display: block;
+        position: relative;*/
+}
+
+.bg-overlay::after {
+    content: "";
+    background: url('http://rosiav2.local/images/calendar/6.jpg');
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+li {
+    font-size: 14px;
+    font-family: Roboto;
+}
+
+.circular-profile {
+    margin: 0 6px;
+    height: 35px;
+    min-width: 0;
+    line-height: 35px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 35px;
+    border-radius: 50%;
+    background: #FF8A65;
+    text-align: center;
+    color: #fff;
+}
+
+/*
+Routes --> Edit route
+*/
+.column-height {
+    height: 100%;
+}
+
+.column-padding {
+    padding: 20px;
+}
+
+/*Sales --> Order Fulfilment*/
+
+.received-icon-wrapper .radio-icon-off{
+    cursor: pointer;
+}
+
+.radio-icon-wrapper a{
+    border-bottom: none;
+}
+
+.order-table-header {
+    padding: 0 10px !important;
+}
+
+.retail-outlet-list-head {
+    padding: 15px 20px;
+}
+
+md-list > md-list-item button.retail-outlet-list-button {
+    background: none;
+}
+
+.order > .ng-binding {
+    cursor: pointer;
+}
+
+.order > .ng-binding:after {
+    font-family: 'Material-Design-Iconic-Font';
+    content: "\f2ea";
+    /*    width: 20px;
+        height: 20px;*/
+    /*background: #ccc;*/
+    display: inline-block;
+    margin-left: 5px;
+    position: absolute;
+    transform: rotate(90deg);
+    font-size: 18px;
+    font-weight: 100;
+    transition-duration: 0.5s;
+}
+
+.order.rotate-me > .ng-binding:after {
+    transform: rotate(-90deg);
+    transition-duration: 0.5s;
+    /*    color: #ff0000;
+        font-size: 28px;*/
+}
+
+.icon-toggle {
+    font-family: 'RosiaIcon';
+    cursor: pointer;
+}
+
+.icon-toggle:before {
+    font-family: 'Material-Design-Iconic-Font';
+    content: '\f276';
+    width: 20px;
+    /* height: 20px; */
+    /* background: #ccc; */
+    /* display: inline-block; */
+    margin-left: -23px;
+    position: absolute;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: baseline;
+    color: rgb(244, 67, 54);
+    transition-duration: 0.5s;
+    transform: rotate(0deg);
+
+}
+
+.icon-toggle.close:before {
+    content: "\f276";
+    transform: rotate(135deg);
+    transition-duration: 0.5s;
+}
+
+.hidden {
+    left: -9999px;
+    position: absolute;
+    z-index: 0;
+/*    -webkit-animation: display-none-transition 1s;
+    animation: display-none-transition 1s;*/
+    transform: translateY(0);
+   /*
+   // transition: 5s ease all;
+   */
+}
+
+.hidden.active {
+    left: 0px;
+    position: relative;
+    transform: translateY(1);
+    transition: 0.5s ease all;
+    z-index: 99;
+}
+
+
+tr.hidden md-data-table-container{
+    height: 0px;
+    transition: 0.5s ease all;
+
+}
+
+tr.active md-data-table-container{
+    height: auto;
+    transition: 0.5s ease all;
+
+}
+
+
+th , td{
+    position: relative;
+}
+
+/*
+li.ng-enter{
+    transition:0.5s ease all;
+    opacity:0;
+    transform: translateX(100%);
+}
+
+li.ng-enter.ng-enter-active{
+    opacity: 1;
+    transform: translateX(0);
+}*/
+
+.menu-first-column{
+    display: flex;
+    align-items: center;
+}
+
+md-tab md-content{
+    width: 100%;
+}
+
+/*For create dialog alignment margin*/
+.right-flex-column{
+    margin-left: auto;
+}
+
+md-datepicker{
+    align-items: center;
+}
+
+.white-cell{
+    background-color: #FFFFFF;
+}
+
+.sbd-inner-table th{
+    padding: 0 !important;
+}
+
+.sbd-inner-table th div{
+    justify-content: center;
+}
+
+.table-confirm-button{
+    text-align: right;
+}
+
+/*tr:focus{
+    outline: none;
+}
+
+tr{
+
+    border-top: 1px solid #C8C2C2;
+    border-bottom: 1px solid #C8C2C2;
+}*/
+
+.sbd-button-outer-wrapper .button-wrapper{
+    text-align: right;
+    position: absolute;
+}
+
+.button-wrapper{
+    text-align: right;
+}
+
+/*.create-view label{
+    font-size: 12px;
+}*/
+
+.create-view{
+    font-size: 14px;
+}
+
+/*For datepicker*/
+.date-picker-wrapper span{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.date-picker-wrapper md-datepicker div{
+    flex: 100;
+}
+
+/*For calender*/
+.md-virtual-repeat-scroller{
+    width: 100% !important;
+}
+
+.md-calendar-scroll-mask{
+    width: 100% !important;
+    display: block;
+}
+
+.md-calendar-scroll-container{
+    width: 100% !important;
+}
+
+/*For SBD*/
+.sbd-table td:nth-child(1) {
+    width: 10%;
+}
+
+.sbd-table td:nth-child(2) {
+    width: 30%;
+}
+
+.sbd-table td:nth-child(3) {
+    width: 15%;
+}
+
+.sbd-table td:nth-child(4) {
+    width: 15%;
+    background-color: white;
+
+}
+
+.sbd-table td:nth-child(5) {
+    width: 30%;
+    background-color: white;
+    position: relative;
+}
+
+.yellow-bar-div{
+    background-color: #ffcc00;
+    position: absolute;
+    width: 40%;
+    z-index: 1;
+    top:5px;
+    left: 20px;
+}
+
+.inner-yellow-bar{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.delete-yellow-bar{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    z-index: 3;
+    background-image: url('../images/delete_icon.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.sbd-table .center-no-padding-cell{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: center;
+}
+
+.sbd-table .distribution-checkbox, .sbd-table .visibility-checkbox{
+    display: inline-block;
+    padding-left: 0 !important;
+}
+.sbd-table th div{
+    justify-content: center;
+    height: 40px !important;
+}
+
+/*Menu Settings table*/
+
+.custom-table .center-no-padding-cell{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    text-align: center;
+}
+
+.custom-table .all-cells{
+    display: inline-block;
+    padding-left: 0 !important;
+    margin: 0 !important;
+}
+
+.custom-table th div{
+    justify-content: center;
+    height: 40px !important;
+}
+
+.menu-settings-table .center-no-padding-cell{
+    text-align: right;
+}
+
+.menu-settings-table td{
+    width: 20%;
+}
+
+.custom-table td span{
+    font-size: 13px;
+}
+
+.menu-item-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.menu-item-wrapper span:hover{
+    cursor: pointer;
+}
+
+.inner-menu-ul{
+    display: none;
+}
+
+th{
+    vertical-align: middle;
+}
+
+#menu-settings-view .custom-md-content, #menu-settings-view .menu-permission-content{
+    min-height: 500px;
+    height: auto;
+}
+
+/*SKU*/
+
+.dialog-inner-left-column{
+    background-color: #EEEEEE;
+}
+
+.order.close > .ng-binding:after{
+    display: none;
+}
+
+.order:hover > .ng-binding:after{
+    display: inline-block;
+}
+
+.focus-highlight{
+    color: #000000 !important;
+}
+
+#sku-view th{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+
+#sku-view tr{
+    outline: none;
+}
+
+#sku-view td, #sku-view th{
+    padding: 0 0 0 30px !important;
+}
+
+/*Hide arrow buttons from input number*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield !important;
+}
+
+.secondary-container{
+    position: absolute;
+    top: 3px;
+    right: 0px;
+    z-index: 999;
+}
+
+li{
+    position: relative;
+}
+
+.hide-menu-icon{
+    visibility: hidden;
+}
+
+md-checkbox.md-checked.check-all-cell .md-icon {
+    background-color: rgb(0, 188, 212);
+}
+
+md-checkbox.md-checked.write-column .md-icon {
+    background-color: rgb(28, 162, 48);
+}
+
+md-checkbox.md-checked.delete-column .md-icon {
+    background-color: rgb(219, 15, 15);
+}
+
+#menu-settings-view .button-wrapper button, #ui-entity-settings-view .button-wrapper button{
+    background-color: #00BCD4;
+    color: #ffffff;
+}
+
+#menu-settings-view .button-wrapper button:hover{
+    background-color: #0098ab;
+    color: #ffffff;
+}
+
+#menu-settings-view .menu-settings-content, #ui-entity-settings-view .ui-settings-permission-content{
+    min-height: 400px;
+    height: 100%;
+    /*position: relative;*/
+    /*display: flex;*/
+}
+
+#menu-settings-view .menu-settings-content .button-wrapper, #ui-entity-settings-view .ui-settings-permission-content .button-wrapper{
+    /*margin-top: 50px;*/
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.ui-settings-table td:first-child{
+    padding: 10px !important;
+}
+
+#ui-entity-settings-view .md-subheader{
+    font-size: 13px;
+    text-align: center;
+}
+
+.full-height-important{
+    height: 100% !important;
+}
+
+input:-webkit-autofill {
+    color: #fff !important;
+}
+
+.side-nav-list-in-block .md-list-item-inner{
+    display: block;
+}
+
+.side-nav-stock-ledger{
+    width:410px;
+}
+
+.padding-stock-ledger{
+    width:50px;
+    margin: auto;
+}
+
+/*Territory*/
+.custom-last-td-view th:last-child{
+    text-align: right !important;
+    padding-right: 0 !important;
+}
+
+.custom-last-td-view td:last-child{
+    text-align: right !important;
+}
+
+
+#businessUnitTemplateContainer{
+
+}
+
+.routeFilterBodyTemplate{
+    padding-top:20px;
+}
+
+.routeFilterFormButton{
+    justify-content: flex-start;
+    display:flex;
+    padding-left: 20px;
+    margin:0px 0px;
+    font-size: 14px;
+    text-transform: none;
+}
+
+.routeFilterFormIcon{
+    margin:0px;
+    padding-top:10px;
+}
+
+.routeFilterFormTitleElements{
+    align-items: center;
+    display: flex;
+    color:#FFFFFF;
+    font-size: 14px;
+}
+
+.routeFilterOKCancelFixed{
+    position:fixed;
+    bottom:0px;
+    right:50px;
+    background-color: #00A6BB;
+}
+
+.routeFilterChildrenElementColor{
+    background-color: #17B7CC;
+}
+
+/*Make datepicker input uneditable*/
+md-datepicker input{
+    pointer-events: none;
+}
+
+.clearfix:before, .clearfix:after, .inner-wrapper:before, .inner-wrapper:after{
+    content:"";
+    display:table;
+}
+
+.clearfix:after, .inner-wrapper:after{
+    clear:both;
+}
+
+.clearfix, .inner-wrapper{
+    zoom:1;
+}
+
+/*Table card cells*/
+.table-th-level1 div{
+    margin-left: 20px;
+}
+
+.table-th-level2 div{
+    margin-left: 40px;
+}
+
+.table-th-level3 div{
+    margin-left: 60px;
+}
+
+.table-td-level1 label{
+    margin-left: 20px;
+    display: block;
+}
+
+.table-td-level2 label{
+    margin-left: 40px;
+}
+
+.table-td-level3 label{
+    margin-left: 60px;
+}
+
+th:last-child, tr > td:last-child {
+    margin-right: 28px !important;
+    padding: 0 !important;
+}
+
+.colorBlack{
+    color: #000000;
+}
+
+md-autocomplete{
+    background: none !important;
+}
+
+md-autocomplete md-autocomplete-wrap{
+    box-shadow: none !important;
+}
+
+md-autocomplete md-autocomplete-wrap input{
+    border-bottom: 1px solid rgba(0,0,0,0.12) !important;
+}
+
+/* Use this for transitions */
+.disable-animate {
+    transition: none !important;
+    animation: none 0s;
+}
+
+#user-account-view tr, #user-account-view label{
+    cursor: pointer;
+}
+
+/*Outelt Detail*/
+md-tabs-wrapper{
+    margin: 5px 5px 0 5px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+#orderDom md-tabs-wrapper{
+    margin: 0;
+}
+
+/*Route dialog*/
+#route-edit-view .angular-google-map-container, #route-edit-view .angular-google-map,
+#route-edit-view #map_terrain_canvas{
+    height:100%;
+}
+
+md-input-container{
+    padding-bottom: 10px !important;
+}
+
+#route-list-view md-input-container{
+    padding-bottom: 26px !important;
+}
+
+#route-list-view md-datepicker{
+    padding-top: 14px;
+    padding-bottom: 5px;
+}
+
+.route-dialog-wrapper md-datepicker button, #route-list-view md-datepicker button {
+    margin: 0;
+    text-align: left;
+}
+
+.route-dialog-wrapper md-datepicker .md-datepicker-input-container, #route-list-view md-datepicker .md-datepicker-input-container{
+    margin: 0;
+    display: flex;
+    flex: 1;
+}
+
+.route-dialog-wrapper md-datepicker .md-datepicker-input-container button, #route-list-view md-datepicker .md-datepicker-input-container button{
+    margin-right: 14px;
+}
+
+/*Give final td same property as other tds*/
+#orderDom .custom-last-td{
+    padding: 0 28px !important;
+}
+
+#user-location-dialog-view md-autocomplete{
+    padding-bottom: 15px;
+}
+
+#user-location-dialog-view md-autocomplete input{
+    padding-left: 5px;
+}
+
+md-autocomplete input{
+    font-size: 100% !important;
+}
+
+
+#stock-ledger-filter md-datepicker button{
+    margin: 0;
+}
+
+/*#stock-ledger-filter md-datepicker{*/
+    /*padding-right: 15px;*/
+/*}*/
+
+#stock-ledger-filter md-datepicker .md-datepicker-input-container{
+    display: flex;
+    flex: 1;
+}
+
+#stock-ledger-filter md-datepicker .md-datepicker-input-container .md-datepicker-triangle-button{
+    right: 5%;
+    margin: 0;
+}
+
+#stock-ledger-filter .range-datepicker-wrapper md-datepicker .md-datepicker-input-container .md-datepicker-triangle-button{
+    right: 12%;
+    margin: 0;
+}
+
+.md-datepicker-calendar-pane .md-datepicker-input-mask{
+    width: 100%;
+    height: 100%;
+}
+
+#sbd-view .first-th {
+    padding-left: 40px !important;
+}

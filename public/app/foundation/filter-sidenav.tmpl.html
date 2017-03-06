@@ -1,0 +1,68 @@
+<ul style="margin: 0">
+
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li ng-if="vm.filterContent.distributors">
+                <div class="collapsible-header black-text">Distributors<i class="material-icons">arrow_drop_down</i>
+                </div>
+                <div class="collapsible-body">
+                    <ul>
+                        <li ng-repeat="distributor in vm.filterContent.distributors">
+                            <div>
+                                <input type="checkbox" class="filled-in" id="distributor-checkbox-{{distributor.id}}"/>
+                                <label for="distributor-checkbox-{{distributor.id}}">{{distributor.name}}</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li ng-if="vm.filterContent.dse">
+                <div class="collapsible-header black-text">DSE<i class="material-icons">arrow_drop_down</i></div>
+                <div class="collapsible-body">
+                    <ul>
+                        <li ng-repeat="dse in vm.filterContent.dse">
+                            <div>
+                                <input type="checkbox" class="filled-in" id="dse-{{dse.id}}"/>
+                                <label for="dse-{{dse.id}}">{{dse.name}}</label>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <a class="collapsible-header black-text">Date<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <div class="black-text" style="display: flex; flex-direction: row">
+                        <span style="white-space: nowrap; padding-right: 30px;">Start Date</span>
+                        <input type="date" id="start_date" class="datepicker" ng-model="vm.dateRange.start">
+                    </div>
+
+                    <div style="display: flex; flex-direction: row">
+                        <span style="white-space: nowrap;  padding-right: 30px;">End Date</span>
+                        <input type="date" id="end_date" class="datepicker" ng-model="vm.dateRange.end">
+                    </div>
+
+                    <div class="modal-footer row" style="flex-direction: row; display: flex">
+                        <a ng-click="vm.controller.getStockLedger();"
+                           class=" modal-action modal-close waves-effect btn-flat">
+                            OK
+                        </a>
+                        <a class=" modal-action modal-close waves-effect btn-flat">Cancel</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!--quick fix please transfer this code to controller-->
+<script>
+    $('.button-collapse').sideNav({
+                menuWidth: 400, // Default is 240
+                edge: 'right', // Choose the horizontal origin
+                closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            }
+    );
+</script>

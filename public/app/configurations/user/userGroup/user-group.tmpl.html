@@ -1,0 +1,88 @@
+<div class="row custom-grid">
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+        <li>
+            <div class="row grid-header-bar no-margin">
+                <div class="col s5" ng-if="vm.listHeader.indexOf('group_name') == -1" ng-click="vm.assignSortType('group_name')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'group_name'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Name</span>
+                </div>
+                <div class="col s5" ng-if="vm.listHeader.indexOf('parent_group_title') == -1"  ng-click="vm.assignSortType('parent_group_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'parent_group_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Parent Group</span>
+                </div>
+                <div class="col s2">
+                </div>
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="userGroup in vm.objectList">
+
+            <div class="collapsible-header">
+                <div class="row collapsible-header-content">
+                    <div class="col s5" ng-if="vm.listHeader.indexOf('group_name') == -1">
+                        {{userGroup.group_name}}
+                    </div>
+                    <div class="col s5" ng-if="vm.listHeader.indexOf('parent_group_title') == -1">
+                        {{userGroup.parent_group_title}}
+                    </div>
+                    <!--<div class="col s2">
+                        &lt;!&ndash; Switch &ndash;&gt;
+                        <div class="switch">
+                            <label>
+                                <input id="switch-{{userGroup.id_user_group}}" type="checkbox"
+                                       ng-click="vm.changeStatus('switch-'+userGroup.id_user_group)" ng-checked="userGroup.status">
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                    </div>-->
+                    <div class="col s2" ng-click="$event.stopPropagation();">
+                        <div class="valign-wrapper relative-position">
+
+                            <i data-activates="user-group-dropdown-{{userGroup.id_user_group}}"
+                               class="tiny material-icons dropdown-button">more_vert</i>
+
+                            <ul id="user-group-dropdown-{{userGroup.id_user_group}}" class="dropdown-content">
+                                <li>
+                                    <a class="modal-trigger" data-target="edit-user-group-{{userGroup.id_user_group}}"
+                                       ng-click="vm.dialogLogic('edit', userGroup)">Edit</a>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Dialog -->
+            <div id="edit-user-group-{{userGroup.id_user_group}}" class="modal">
+
+                <div ng-include=" 'app/configurations/user/userGroup/create-user-group-form.tmpl.html' "></div>
+
+            </div>
+
+        </li>
+
+        <li>
+            <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+        </li>
+
+    </ul>
+</div>
+
+<div class="fixed-action-btn modal-wrapper">
+    <a class="waves-effect waves-dark btn-floating btn-large custom-primary-color red darken-2 modal-trigger"
+       data-target="add-dialog" ng-click="vm.dialogLogic('add', user)">
+        <i class="large material-icons">add</i>
+    </a>
+</div>
+
+<!-- Add Dialog -->
+<div id="add-dialog" class="modal">
+
+    <div ng-include=" 'app/configurations/user/userGroup/create-user-group-form.tmpl.html' "></div>
+
+</div>

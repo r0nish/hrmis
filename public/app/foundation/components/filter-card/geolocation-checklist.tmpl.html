@@ -1,0 +1,48 @@
+<div ng-init="selected = false" class="row">
+
+    <div class="row no-margin grey lighten-4">
+        <ul class="collapsible no-card-style no-margin" data-collapsible="accordion">
+
+            <li bindonce sly-repeat="location in geoLocation.children">
+                <div class="collapsible-header no-padding no-background row">
+
+                    <div class="row collapsible-header-content" ng-init="$ctrl.setCheckBoxStatus(location)">
+
+                        <input type="checkbox" class="filled-in" ng-checked="$ctrl.getStatus(location)"
+                               ng-click="$ctrl.toggleGeographicCheckBox(location)"
+                               id="children-checkbox-{{location.id_geographic_location}}"/>
+
+                        <label style="display: inline"
+                               for="children-checkbox-{{location.id_geographic_location}}">
+                        </label>
+
+                        <span ng-init="selected = false" ng-click="selected = !selected ">
+                            {{location.title}}
+                        </span>
+
+                        <span ng-if="location.children.length > 0"> ({{location.children.length}})</span>
+
+                        <span ng-if="location.towns.length > 0"> ({{location.towns.length}})</span>
+                    </div>
+
+                    <div ng-show="location.children.length > 0 || location.towns.length > 0">
+                        <div ng-show="location.towns.length > 0 && selected">
+                            <div>
+                                <div ng-include="'app/foundation/components/filter-card/town-checklist.tmpl.html'"
+                                     onload="geolocations = location; parentName = location.title">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="location.children.length > 0 && selected">
+                            <div ng-include="'app/foundation/components/filter-card/geolocation-checklist.tmpl.html'"
+                                 onload="geoLocation = location; geoLocationID = location.id_geographic_location">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+

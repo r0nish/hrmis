@@ -1,0 +1,93 @@
+<div class="row custom-grid">
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+        <li>
+            <div class="row grid-header-bar no-margin">
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('town_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'town_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Town</span>
+                </div>
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('route_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'route_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Route</span>
+                </div>
+
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('total_outlets')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'total_outlets'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Total Retail Outlet</span>
+                </div>
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('user_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'user_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>DSE</span>
+                </div>
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('distributor_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'total_outlets'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Distributor</span>
+                </div>
+                <div class="col s1 halign-wrapper valign-wrapper no-margin">
+                    <i style="display: inline-block; padding: 5px; border-radius: 50%;"
+                       class="tiny material-icons dropdown-button"
+                       ng-click="vm.downloadData();">file_download</i>
+                </div>
+
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="callNotPerformed in vm.objectList">
+
+            <div class="collapsible-header">
+                <div class="row collapsible-header-content"
+                     ng-click="vm.getCallNotPerformedRouteRetailOutlet(callNotPerformed)">
+                    <div class="col s3 no-margin" >
+                        {{callNotPerformed.town_title}}
+                    </div>
+                    <div class="col s3 no-margin" >
+                        {{callNotPerformed.route_title}}
+                    </div>
+                    <div class="col s3 no-margin" >
+                        {{callNotPerformed.total_outlets}}
+                    </div>
+                    <div class="col s3 no-margin" >
+                        {{callNotPerformed.user_title}}
+                    </div>
+                    <div class="col s3 no-margin">
+                        {{callNotPerformed.distributor_title}}
+                    </div>
+                    <div class="col s1 no-margin" >
+                    </div>
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="grid-header-bar">
+                    <div class="col s12 row no-margin">
+                        <div class="col s3">
+                            S.No
+                        </div>
+                        <div class="col s6">
+                            Retail Outlet
+                        </div>
+                    </div>
+                </div>
+                <div class="row" sly-repeat="retailOutlet in callNotPerformed.children" style="padding: 0 2rem">
+                    <div class="col s3">
+                        {{$index+1}}
+                    </div>
+                    <div class="col s6 cursor-pointer" ng-click="vm.controller.detailView(retailOutlet)">
+                        <span>{{retailOutlet.retail_outlet_title}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+
+        <li>
+            <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+        </li>
+
+    </ul>
+</div>

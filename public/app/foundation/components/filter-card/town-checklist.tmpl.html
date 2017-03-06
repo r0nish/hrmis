@@ -1,0 +1,23 @@
+<div class="row grey lighten-2">
+
+    <ul class="collapsible no-card-style no-margin" data-collapsible="accordion"
+        sly-prevent-evaluation-when-hidden>
+
+        <li bindonce sly-repeat="town in geolocations.towns">
+            <div class="collapsible-header no-padding no-background"
+                 ng-init="$ctrl.setCheckBoxStatus(town)">
+
+                <div class="row collapsible-header-content">
+
+                    <input type="checkbox" class="filled-in"
+                           id="town-checkbox-{{town.id_town}}"
+                           ng-checked="$ctrl.getStatus(town)"
+                           ng-click="$ctrl.toggleTownBox(town)"/>
+
+                    <label style="display: inline" for="town-checkbox-{{town.id_town}}"></label>
+                    <span>{{town.title}}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

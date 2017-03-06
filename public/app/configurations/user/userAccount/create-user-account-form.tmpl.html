@@ -1,0 +1,118 @@
+<div class="modal-content">
+
+    <div>
+        <h2>Create User Account</h2>
+    </div>
+
+    <div>
+        <form name="taskForm" novalidate>
+            <div class="row">
+                <label>Business Unit</label>
+
+
+                <!-- <select class="browser-default" material-select
+                         ng-model="vm.item.business_unit_id" ng-change="vm.getDistributorByBU()" name="task">
+                     <option value="" disabled selected>Choose your option</option>
+                     <option bindonce sly-repeat="bu in vm.bu" value="{{bu.id_business_unit}}">
+                         {{bu.title}}
+                     </option>
+                 </select>-->
+
+
+                <select class="browser-default"
+                        ng-change="vm.getDistributorByBU()"
+                        ng-options="bu.id_business_unit as bu.title for bu in vm.bu"
+                        ng-model="vm.item.business_unit_id" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <label>User Group</label>
+
+                <!--<select class="browser-default" material-select
+                        ng-model="vm.item.user_group_id" ng-change="vm.assignUserRole()" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="group in vm.userGroup" value="{{group.id_user_group}}" >
+                        {{group.group_name}}
+                    </option>
+                </select>-->
+
+                <select class="browser-default"
+                        ng-change="vm.assignUserRole()"
+                        ng-options="group.id_user_group as group.group_name for group in vm.userGroup"
+                        ng-model="vm.item.user_group_id" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+            <div class="row"
+                 ng-if="vm.item.userRole == 'STL' || vm.item.userRole == 'DIS' || vm.item.userRole == 'DSE'">
+                <label>Distributor</label>
+                <!--<select class="browser-default" material-select
+                        ng-model="vm.item.distributor_id" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option bindonce sly-repeat="distributor in vm.distributor" value="{{distributor.id_distributor}}">{{distributor.title}}</option>
+                </select>-->
+
+                <select class="browser-default"
+                        ng-options="distributor.id_distributor as distributor.title for distributor in vm.distributor"
+                        ng-model="vm.item.distributor_id" name="task">
+                    <option value="" disabled selected>Choose your option</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6 padding-left-0">
+                    <input id="first_name" type="text" class="validate"
+                           ng-model="vm.item.first_name" name="first_name"
+                           ng-minlength="3" ng-maxlength="25" ng-pattern="/^[\w -]*$/" required>
+                    <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6 padding-right-0">
+                    <input id="last_name" type="text" class="validate"
+                           ng-model="vm.item.last_name" name="last_name"
+                           ng-minlength="3" ng-maxlength="25" ng-pattern="/^[\w -]*$/" required>
+                    <label for="last_name">Last Name</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6 padding-left-0">
+                    <input id="email"
+                           ng-model="vm.item.email"
+                           ng-minlength="4" ng-maxlength="100" required>
+                    <label for="email">Email Address</label>
+                </div>
+                <!--<div class="input-field">
+                    <input id="email" type="email" class="validate" ng-model="vm.user.email"
+                           ng-minlength="5" ng-maxlength="35" required>
+                    <label for="email">Email Address</label>
+                </div>-->
+                <div class="input-field col s6 padding-right-0">
+                    <input id="mobile_number" type="number" class="validate"
+                           ng-model="vm.item.mobile_number" name="mobile_number"
+                           ng-minlength="10" ng-maxlength="10" ng-pattern="/^[\w -]*$/" required>
+                    <label for="email">Mobile Number</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field">
+                    <input id="password" type="password" class="validate"
+                           ng-model="vm.item.password" name="pass"
+                           ng-minlength="5" ng-maxlength="25" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn-flat "
+       ng-click="vm.controller.add()">OK</a>
+    <a ng-click="vm.resetDialogData()" class="modal-action modal-close waves-effect btn-flat ">Cancel</a>
+</div>

@@ -1,0 +1,40 @@
+<div class="sales-force-parent">
+    <div ng-click=" "
+         class="padding-10 padding-left-30" flex layout="row" style="cursor: pointer; outline: none">
+        <span ng-if="element.children.length == 0" style="height: 24px; width: 24px;"></span>
+        <md-icon ng-if="element.children.length > 0" class="zmdi zmdi-chevron-down"
+                 style="color: black; display: flex; align-items: center"></md-icon>
+        <span ng-style="!element.userLocation_title && {'flex':'1'}" style="font-family: Roboto">
+            {{element.first_name + " " + element.last_name + " " + "[" + element.user_group_name + "]"}}
+        </span>
+        <span ng-if="element.userLocation_title" flex style="font-family: Roboto">
+            {{" - " + element.userLocation_title}}
+        </span>
+    </div>
+
+    <!--<div>The children length is : {{element.children.length}}</div>-->
+
+    <div ng-if="element.children.length > 0" class="sales-force-child padding-left-20">
+        <div ng-repeat="element in element.children" ng-class="{'sales-force-child-last':$last}">
+            <div ng-include=" 'app/configurations/user/userAccount/userDetail/user-detail-configuration-hierarchy-list.tmpl.html' "
+                 onload="element = element">
+            </div>
+        </div>
+    </div>
+    <!--<div ng-repeat="x in element.children" style="padding: 40px">
+        <p>{{x}}</p>
+    </div>-->
+
+    <!--<div ng-if="element.children.length > 0" class="sales-force-child padding-left-20 hide">-->
+        <!--<p>DIv ma entered</p>-->
+
+        <!--<div ng-repeat="element in element.children" ng-class="{'sales-force-child-last':$last}">-->
+            <!--<p>repeat {{element}}</p>-->
+
+            <!--<div ng-include=" 'app/configurations/user/userAccount/userDetail/user-detail-configuration-hierarchy-list.tmpl.html' "-->
+                 <!--onload="element = element">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+</div>

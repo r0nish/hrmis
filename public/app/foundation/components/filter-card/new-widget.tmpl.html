@@ -1,0 +1,198 @@
+<ul style="margin: 0">
+
+    <div class="row col s12 valign-wrapper" style="margin-bottom: 0px">
+        <h3 class="col s10 halign-wrapper">
+            {{$ctrl.title}}
+        </h3>
+
+        <div class="col s2">
+            <i style="vertical-align: middle" class="material-icons cursor-pointer" ng-click="$ctrl.resetFilterForm()"
+               ng-hide="$ctrl.header.clearStatus">
+                clear_all
+            </i>
+        </div>
+    </div>
+
+
+    <ul class="collapsible" data-collapsible="accordion">
+
+        <li ng-if="$ctrl.refcontroller.dateFilter && $ctrl.header.table != 'sbd-distribution-report' &&
+            $ctrl.header.table != 'sbd-distribution'">
+            <div style="padding-top: 15px; padding-bottom: 15px;">
+                <form name="taskForm" novalidate>
+                    <div class="row" style="line-height: normal">
+                        <div class="col s6">
+                            <label>Start Date</label>
+                            <input type="date" id="start_date" class="datepicker"
+                                   ng-model="$ctrl.refcontroller.dateFilter.start">
+                        </div>
+                        <div class="col s6">
+                            <label>End Date</label>
+                            <input type="date" id="end_date" class="datepicker"
+                                   ng-model="$ctrl.refcontroller.dateFilter.end">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row no-margin filter-card-navigation">
+
+                    <div class="col s8 padding-0 no-margin">
+                        <div class="row no-margin" ng-if="$ctrl.header.table === 'dse-productivity' && !$ctrl.refcontroller.checkDate()">
+                            <input type="checkbox" class="filled-in" id="daily-wise"
+                                   ng-checked="$ctrl.header.dailyStatus"
+                                   ng-click="$ctrl.refcontroller.controller.query.status = !$ctrl.refcontroller.controller.query.status">
+                            <label for="daily-wise">Daily Basis</label>
+                        </div>
+                    </div>
+
+                    <div class="col s4 padding-0 no-margin">
+                        <a style="height: 40px; line-height: 42px; text-align: center; border: 0"
+                           ng-click="$ctrl.filterByDate()" class="waves-effect btn-flat grey lighten-4">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+
+        <li class="padding-10" ng-if="$ctrl.refcontroller.periodWiseMonth">
+            <div class="row">
+                <h4 class="no-margin padding-10">Period Wise Filter</h4>
+                <select class="browser-default"
+                        ng-init="$ctrl.refcontroller.periodWiseMonth.selectedPeriod = $ctrl.refcontroller.periodWiseMonth.selectedPeriod || $ctrl.refcontroller.periodWiseMonth.periods[0]"
+                        ng-model="$ctrl.refcontroller.periodWiseMonth.selectedPeriod"
+                        ng-options="period as period.title for period in $ctrl.refcontroller.periodWiseMonth.periods"
+                        ng-change="$ctrl.monthWiseFilter()">
+                    <option value="" disabled selected></option>
+                </select>
+            </div>
+        </li>
+
+
+        <li sly-repeat="header in $ctrl.header.data">
+            <div class="collapsible-header">
+                {{header.title}}
+                <i class="material-icons">
+                    arrow_drop_down
+                </i>
+            </div>
+
+            <div class="collapsible-body" style="padding: 0px !important;">
+                <div class="row no-margin" ng-show="header.autoComplete">
+                    <div class="col s1">
+                        <i style="vertical-align: middle" class="material-icons">
+                            search
+                        </i>
+                    </div>
+                    <div class="col s10">
+                        <input class="no-margin" type="text" ng-model="search[header.field]" placeholder="Search">
+                    </div>
+                </div>
+
+
+                <div class="row margin-top-0">
+                    <div class="col s12 m12">
+                        <ul class="collapsible filter-data-wrapper" data-collapsible="accordion">
+
+                            <li sly-repeat="data in $ctrl.refcontroller[header.list] | filter:search:strict | orderBy:header.field">
+
+                                <div ng-if="header.title != 'Geographic Location'" class="collapsible-header"
+                                     style="padding: 0 30px !important;">
+
+                                    <input ng-if="header.type == 'checkbox'" type="checkbox" class="filled-in"
+                                           id="{{header.list}}-checkbox-{{data[header.primaryId]}}"
+                                           ng-checked="$ctrl.isCheckBoxSelected(data, header.primaryId)"
+                                           ng-click="$ctrl.toggleCheckBox(data, header)"/>
+
+                                    <label style="display: inline"
+                                           for="{{header.list}}-checkbox-{{data[header.primaryId]}}">
+                                    </label>
+
+                                    <span>{{data[header.field]}}</span>
+
+                                    <span ng-if="data[header.children.list].length > 0">
+                                        ({{data[header.children.list].length}})
+                                    </span>
+                                </div>
+
+
+                                <div ng-if="data[header.children.list].length > 0" class="collapsible-body black-text"
+                                     sly-repeat="children in data[header.children.list] | orderBy: header.children.field"
+                                     style="padding: 0 60px !important;">
+
+                                    <input ng-if="header.type == 'checkbox'" type="checkbox" class="filled-in"
+                                           id="{{header.children.list}}-checkbox-{{children[header.children.primaryId]}}"
+                                           ng-checked="$ctrl.isCheckBoxSelected(children, header.children.primaryId)"
+                                           ng-click="$ctrl.toggleCheckBox(children, header.children, data, header)"/>
+
+                                    <label style="display: inline"
+                                           for="{{header.children.list}}-checkbox-{{children[header.children.primaryId]}}">
+                                    </label>
+
+                                    <span>{{children[header.children.field]}}</span>
+                                </div>
+
+
+                                <div ng-if="header.title == 'Geographic Location'"
+                                     class="collapsible-header padding-left-right-30"
+                                     ng-init="$ctrl.setCheckBoxStatus(data)">
+
+                                    <input type="checkbox" class="filled-in"
+                                           id="{{header.list}}-checkbox1-{{data['id_geographic_location']}}"
+                                           ng-checked="data.checkBoxStatus"
+                                           ng-click="$ctrl.toggleGeographicCheckBox(data)"/>
+
+                                    <label style="display: inline"
+                                           for="{{header.list}}-checkbox1-{{data['id_geographic_location']}}">
+                                    </label>
+
+                                    <span>{{data[header.field]}}</span>
+
+                                    <span ng-if="data.children.length > 0">
+                                        ({{data.children.length}})
+                                    </span>
+
+                                    <span ng-if="data.towns.length > 0">
+                                        ({{data.towns.length}})
+                                    </span>
+                                </div>
+
+
+                                <div ng-if="header.title == 'Geographic Location'" class="collapsible-body black-text">
+
+                                    <div ng-if="data.children.length > 0 || data.towns.length > 0">
+                                        <div ng-if="data.towns.length > 0">
+                                            <div>
+                                                <div ng-include="'app/foundation/components/filter-card/town-checklist.tmpl.html'"
+                                                     onload="geolocations = data; parentName = data.title">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div ng-if="data.children.length > 0">
+                                            <div ng-include="'app/foundation/components/filter-card/geolocation-checklist.tmpl.html'"
+                                                 onload="geoLocation = data; geoLocationID = data.id_geographic_location">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</ul>
+
+
+<!--quick fix please transfer this code to controller-->
+<script>
+    $('.button-collapse').sideNav({
+                menuWidth: 400, // Default is 240
+                edge: 'right', // Choose the horizontal origin
+                closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            }
+    );
+</script>

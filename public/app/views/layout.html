@@ -1,0 +1,173 @@
+<!--The page refers to the master Layout Page setup for the app..
+
+|SIDE BAR |  MAIN CONTENT| FOOTER SECTION | TOP BAR.|-->
+
+
+<div id="rosia-main-wrapper" ng-controller="RosiaController as vm">
+
+    <!--pre loader section-->
+    <div ng-show="vm.loader" class="preloader-wrapper rosia-pre-loader big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+APP BAR
+-->
+    <header>
+        <nav class="top-nav custom-primary-color red darken-2">
+            <div class="container-fluid">
+
+                <div class="nav-wrapper" style="display: flex; flex-direction: row; align-items: center">
+                    <a ng-init="navigation = true" ng-click="navigation = !navigation"
+                       style="display: inline-block;
+                                padding: 15px;
+                                border-radius: 50%;"
+                       class=" material-icons waves-effect">
+                        menu
+                    </a>
+
+                    <div class="app-title valign-wrapper" style="padding: 0 5px">
+                        <span>Seva Dev</span>
+                        <span style="font-size: 35px; font-style: italic; font-weight: 600"></span>
+                    </div>
+                    <!--<div class="user-session-wrapper" ng-controller="AppBarController as vm">-->
+                        <!--<span class="user-session-name">{{vm.userInfo.first_name + " " + vm.userInfo.last_name}}</span>-->
+                        <!--<span class="user-session-designation">{{vm.userInfo.userGrp}}</span>-->
+                        <!--<a class="waves-effect material-icons logout-icon-wrapper"-->
+                           <!--ng-click="vm.logoutClick()">exit_to_app-->
+                        <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="app-title">ROSIA</div>-->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--
+    APP BAR ENDS
+    -->
+    <main class="nav-main-layout">
+
+        <ul ng-show="navigation" id="rosia-side-nav" class="fade side-nav animate-show"
+            ng-style="vm.rosiaSidebarStyle" style="transform: translateX(0%);">
+
+
+            <li ng-init="selected = false"  class="bold">
+
+                <a  ui-sref="app.dashboard" class="waves-effect waves-dark">
+DashBoard
+                </a>
+
+                <a ui-sref="app.country" class="waves-effect waves-dark">
+                    Country
+                </a>
+
+            </li>
+
+
+            <!--  <div>
+                  {{vm.menuItems}}
+              </div>-->
+
+        </ul>
+
+
+
+        <!--<main class="nav-main-layout" ng-controller="RosiaContainerController as vm" ng-style="vm.rosiaContainerStyle">-->
+
+        <!--<ul ng-controller="NavigationController as vm"  ng-show="navigation" id="rosia-side-nav" class="fade side-nav animate-show"-->
+            <!--ng-style="vm.rosiaSidebarStyle" style="transform: translateX(0%);">-->
+
+
+            <!--<li ng-init="selected = false" bindonce ng-repeat="item in vm.menuItems" class="bold">-->
+
+                <!--<a bo-if="!item.children.length" ui-sref="app.{{::item.parent.url}}" class="waves-effect waves-dark">-->
+                    <!--{{::item.parent.title}}-->
+                <!--</a>-->
+
+                <!--<div class="collapsible-body" style="display: block;" bo-if="item.children">-->
+
+                    <!--<a class="waves-effect waves-dark" ng-click="selected = !selected">-->
+                        <!--{{::item.parent.title}}-->
+                        <!--<span class="nav-bar-icons"><i class="tiny material-icons">keyboard_arrow_right</i></span>-->
+                    <!--</a>-->
+
+                    <!--<ul ng-init="selected = false" ng-if="selected" bo-if="item.children">-->
+                        <!--<li bindonce ng-repeat="innerItem in item.children">-->
+                            <!--<a bo-if="!innerItem.children.length" ui-sref="app.{{::innerItem.parent.url}}"-->
+                               <!--class="waves-effect waves-dark">-->
+                                <!--{{::innerItem.parent.title}}-->
+                            <!--</a>-->
+
+                            <!--<div class="collapsible-body" style="display: block;" bo-if="innerItem.children">-->
+
+                                <!--<a class="waves-effect waves-dark" ng-click="selected = !selected">-->
+                                    <!--{{::innerItem.parent.title}}-->
+                                    <!--<span class="nav-bar-icons"><i class="tiny material-icons">keyboard_arrow_right</i></span>-->
+                                <!--</a>-->
+
+                                <!--<ul ng-init="selected = false" ng-if="selected" bo-if="innerItem.children.length > 0">-->
+
+                                    <!--<li class="rosia-third-level-menu" bindonce-->
+                                        <!--ng-repeat="thirdChildrenItem in innerItem.children">-->
+
+                                        <!--<a ui-sref="app.{{::thirdChildrenItem.parent.url}}"-->
+                                           <!--class="waves-effect waves-dark">-->
+                                            <!--{{::thirdChildrenItem.parent.title}}-->
+                                        <!--</a>-->
+
+
+                                    <!--</li>-->
+
+                                <!--</ul>-->
+
+                            <!--</div>-->
+
+
+                        <!--</li>-->
+                    <!--</ul>-->
+
+                <!--</div>-->
+
+            <!--</li>-->
+
+
+            <!--&lt;!&ndash;  <div>-->
+                  <!--{{vm.menuItems}}-->
+              <!--</div>&ndash;&gt;-->
+
+        <!--</ul>-->
+
+
+        <!--SIDE BAR ENDS-->
+        <div id="rosia-container">
+            <div ui-view></div>
+        </div>
+    </main>
+
+
+    <!--SIDE BAR -->
+
+    <footer id="rosia-page-footer" class="page-footer custom-primary-color red darken-2"
+            style="height: 0; display: none">
+        <div class="footer-copyright">
+            <div class="container">
+                <a class="grey-text text-lighten-4 right"
+                   href="https://github.com/Dogfalo/materialize/blob/master/LICENSE">Seva Dev</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+

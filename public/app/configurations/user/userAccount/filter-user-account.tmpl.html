@@ -1,0 +1,63 @@
+<md-sidenav class="side-nav-list-in-block md-sidenav-right md-whiteframe-z2" md-component-id="filter-right">
+    <md-toolbar class="toolbar-default">
+        <div class="md-toolbar-tools">
+            <h2 flex translate>{{vm.title}}</h2>
+            <md-button class="md-icon-button" ng-click="filterCancelClick('filter-right')" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-list>
+        <md-list-item  class="md-1-line" >
+            <div class="padding-left-20" ng-class = "{true:'icon-toggle'}[vm.userGroupLength > 0]" ng-click="vm.toggleInnerTableOutlet('categoryFilter','id_user_group')">
+                User Group
+            </div>
+            <div id="categoryFilter" class="hide inner-table">
+                <div  ng-if="vm.userGroupLength > 0" ng-repeat="x in vm.userGroup">
+                    <md-checkbox ng-checked="vm.exists(x,'id_user_group')" ng-click="vm.toggle(x,'id_user_group')">
+                        {{x.group_name}}
+                    </md-checkbox>
+                </div >
+            </div>
+        </md-list-item>
+
+        <!--<md-list-item  class="md-1-line" >-->
+            <!--<div class="padding-left-20" ng-class = "{true:'icon-toggle'}[userGroup.length > 0]" ng-click="toggleInnerTableOutlet('parentUserFilter','parent_user_group_id')">-->
+               <!--Parent User Group-->
+            <!--</div>-->
+            <!--<div id="parentUserFilter" class="hide inner-table">-->
+                <!--<div  ng-if="userGroup.length > 0" ng-repeat="x in userGroup">-->
+                    <!--<md-checkbox ng-checked="exists(x,'parent_user_group_id')" ng-click="toggle(x,'parent_user_group_id')">-->
+                        <!--{{x.group_name}}-->
+                    <!--</md-checkbox>-->
+                <!--</div >-->
+            <!--</div>-->
+        <!--</md-list-item>-->
+
+        <!--<md-list-item  class="md-1-line" >-->
+            <!--<div class="padding-left-20" ng-class = "{true:'icon-toggle'}[ businessUnit.length > 0]" ng-click="toggleInnerTableOutlet('businessUnit')">-->
+                <!--Business Unit-->
+            <!--</div>-->
+            <!--<div id="businessUnit"  class="hide inner-table">-->
+                <!--<div ng-if=" businessUnit.length > 0" ng-repeat="x in businessUnit">-->
+                    <!--<md-checkbox ng-checked="exists(x,'id_business_unit')" ng-click="toggle(x,'id_business_unit')">-->
+                        <!--{{x.title}}-->
+                    <!--</md-checkbox>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</md-list-item>-->
+
+    </md-list>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.filterCancelClick('filter-right')">Cancel</md-button>
+        <md-button ng-click="vm.filterClick('filter-right')" class="md-primary">Ok
+        </md-button>
+    </div>
+</md-sidenav>
+
+
+
+
+
+

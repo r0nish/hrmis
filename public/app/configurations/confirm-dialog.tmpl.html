@@ -1,0 +1,23 @@
+<md-dialog aria-label="Mango (Fruit)" flex="30" flex-sm="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h3>
+                <span>{{vm.title}}</span>
+            </h3>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="sticky-container">
+            <p style="font-size: 12px; padding-top: 20px;">
+                {{vm.content}}
+                </p>
+    </md-dialog-content>
+
+    <div class="md-actions" layout="row" style="border-top: 2px solid #FAFAFA">
+        <span flex></span>
+        <md-button ng-click="cancel()">Cancel</md-button>
+        <md-button ng-click="hide()" class="md-primary">Ok</md-button>
+    </div>
+</md-dialog>

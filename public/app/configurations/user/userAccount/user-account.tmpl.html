@@ -1,0 +1,178 @@
+<div class="row custom-grid">
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+        <li>
+            <div class="row grid-header-bar no-margin">
+                <div class="col s3" ng-click="vm.assignSortType('title')" ng-if="vm.listHeader.indexOf('title') == -1">
+                    <span class="sortOrder" ng-show="vm.sortType === 'title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>User Name</span>
+                </div>
+                <div class="col s3" ng-click="vm.assignSortType('userGrp')" ng-if="vm.listHeader.indexOf('userGrp') == -1">
+                    <span class="sortOrder" ng-show="vm.sortType === 'userGrp'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>User Group</span>
+                </div>
+                <div class="col s3" ng-click="vm.assignSortType('email')" ng-if="vm.listHeader.indexOf('email') == -1">
+                    <span class="sortOrder" ng-show="vm.sortType === 'email'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Email</span>
+                </div>
+                <div class="col s2" ng-click="vm.assignSortType('mobile_number')" ng-if="vm.listHeader.indexOf('mobile_number') == -1">
+                    <span class="sortOrder" ng-show="vm.sortType === 'mobile_number'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Mobile</span>
+                </div>
+                <div class="col s1">
+                    <i style="display: inline-block; padding: 5px; border-radius: 50%;"
+                       data-activates="slide-out" ng-click="vm.getFilterData()"
+                       class="tiny button-collapse material-icons waves-effect">
+                        filter_list
+                    </i>
+                </div>
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="user in vm.objectList">
+
+            <div class="collapsible-header">
+                <div class="row collapsible-header-content">
+                    <div class="col s3" ng-if="vm.listHeader.indexOf('title') == -1">
+                        <span>{{user.title}}</span>
+                        <span style="position: static" ng-if="user.children.length && user.children != 'null'"
+                                      class="badge custom-primary-color red darken-2 white-text">{{user.children.length}}</span>
+                    </div>
+                    <div class="col s3" ng-if="vm.listHeader.indexOf('user_group') == -1">
+                        {{user.userGrp}}
+                    </div>
+                    <div class="col s3" ng-if="vm.listHeader.indexOf('email') == -1">
+                        {{user.email}}
+                    </div>
+                    <div class="col s2" ng-if="vm.listHeader.indexOf('mobile_number') == -1">
+                        {{user.mobile_number}}
+                    </div>
+                    <div class="col s1" ng-click="$event.stopPropagation();">
+                        <div
+                                class="valign-wrapper relative-position">
+                            <i data-activates="user-account-dropdown-{{user.id_user}}"
+                               class="tiny material-icons dropdown-button">more_vert</i>
+
+                            <ul id="user-account-dropdown-{{user.id_user}}" class="dropdown-content">
+                                <li>
+                                    <a class="modal-trigger" data-target="edit-user-{{user.id_user}}"
+                                       ng-click="vm.dialogLogic('edit', user)">Edit</a>
+                                </li>
+                                <li ng-if=" user.user_group_label == 'BU' ">
+                                    <a class="modal-trigger" data-target="assign-user-{{user.id_user}}"
+                                       ng-click="vm.assignChildrenUsersLogic(user)">Assign
+                                        User</a>
+                                </li>
+                                <li ng-if=" user.user_group_label == 'STL' ">
+                                    <a class="modal-trigger" data-target="assign-distributor-{{user.id_user}}"
+                                       ng-click="vm.distributorAssignmentLogic(user)">Assign
+                                        Distributor</a>
+                                </li>
+
+                                <li>
+                                    <a ng-click="vm.detailView(user)">
+                                        Detail View
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible-body" ng-if="user.children.length && user.children != 'null'">
+
+                <div class="row grey lighten-4 no-margin">
+                    <div class="col s12">
+                        <div class="nested-list">
+
+                            <!--<div class="nested-list-header row">
+                                <div class="col s4">
+                                    Username
+                                </div>
+
+                                <div class="col s4">
+                                    User Group
+                                </div>
+
+                                <div class="col s4">
+                                    Email
+                                </div>
+
+                            </div>-->
+
+
+                            <div class="body container-fluid"
+                                 id="children-grid-{{user.id_user}}">
+
+                                <div bindonce sly-repeat="childrenUsers in user.children" class="row">
+                                    <div class="col s4">
+                                        {{childrenUsers.title}}
+                                    </div>
+                                    <div class="col s4">{{childrenUsers.userGrp}}
+                                    </div>
+                                    <div class="col s4">{{childrenUsers.email}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--DIALOGS-->
+            <div>
+                <!-- Edit Dialog -->
+                <div id="edit-user-{{user.id_user}}"
+                     class="modal">
+
+                    <div ng-include=" 'app/configurations/user/userAccount/edit-user-account-form.tmpl.html' "></div>
+
+                </div>
+
+                <!-- Assign Children Dialog -->
+                <div id="assign-user-{{user.id_user}}"
+                     class="modal">
+
+                    <div ng-include=" 'app/configurations/user/userAccount/assign-children-users.tmpl.html' "></div>
+
+                </div>
+
+                <!-- Assign Distributor Dialog -->
+                <div id="assign-distributor-{{user.id_user}}"
+                     class="modal">
+                    <div ng-include=" 'app/configurations/user/userAccount/distributor-assignment.tmpl.html' "></div>
+                </div>
+            </div>
+
+        </li>
+
+        <li>
+            <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+        </li>
+    </ul>
+</div>
+
+<div class="fixed-action-btn modal-wrapper">
+    <a class="waves-effect waves-dark btn-floating btn-large custom-primary-color red darken-2 modal-trigger"
+       data-target="add-dialog" ng-click="vm.dialogLogic('add', user)">
+        <i class="large material-icons">add</i>
+    </a>
+
+</div>
+
+
+<!-- Add Dialog -->
+<div id="add-dialog" class="modal">
+    <div ng-include=" 'app/configurations/user/userAccount/create-user-account-form.tmpl.html' "></div>\
+</div>
+
+<div id="slide-out" class="side-nav filter-sidenav" ng-style="vm.controller.filterSidebarStyle()">
+    <filter-card header="vm.filterHeader" title="Filter" refcontroller="vm"></filter-card>
+</div>

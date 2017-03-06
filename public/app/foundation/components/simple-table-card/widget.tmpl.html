@@ -1,0 +1,321 @@
+<div class="widget md-whiteframe-z2" ng-class="::{'widget-overlay-title': vm.overlayTitle}" flex
+     layout="{{vm.widgetLayout}}">
+
+    <md-data-table-toolbar ng-hide="vm.refcontroller.searchShow">
+
+        <h2 class="md-title" ng-if="::vm.title">{{::vm.title}}</h2>
+
+        <div flex></div>
+
+
+        <md-menu ng-if="::vm.menu">
+
+            <md-button class="widget-button md-icon-button" ng-click="$mdOpenMenu()" aria-label="open menu">
+                <md-icon md-font-icon="{{::vm.menu.icon}}"></md-icon>
+            </md-button>
+
+            <md-menu-content width="3">
+
+                <md-menu-item ng-repeat="item in ::vm.menu.items">
+                    <md-button ng-click="item.click($event)">
+                        <md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>
+                        <span translate>{{::item.title}}</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-data-table-toolbar>
+
+
+    <md-data-table-toolbar ng-show="vm.refcontroller.searchShow" class="md-data-table-toolbar">
+
+        <md-icon md-font-icon="zmdi zmdi-search" class="padding-right-10"></md-icon>
+
+        <form flex="" name="">
+            <input type="text" ng-model="vm.refcontroller.query.searchKey" placeholder="search"
+                   ng-keyup="vm.searchKeyWord(vm.refcontroller.query.searchKey)">
+            <md-divider color="black"></md-divider>
+        </form>
+
+
+        <md-button aria-label='search' class="md-icon-button left-flex-column"
+                   ng-click="vm.resetSearch()">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </md-data-table-toolbar>
+
+
+    <md-data-table-container>
+
+        <!--
+                Level 1 Table
+        -->
+
+        <table style="white-space: nowrap" md-data-table class="md-primary md-data-table" md-progress="">
+            <thead>
+            <!--(100/::vm.header.level1.length)%-->
+            <tr>
+                <th ng-style="::vm.setStyleLevel1()" name="{{::header.label}}" ng-repeat="header in ::vm.header.level1"
+                    class="order close table-th-level1"
+                    ng-click="vm.toggleIconOrderBy($event); vm.sortType='{{::header.field}}'; vm.sortReverse = !vm.sortReverse"></th>
+                <!--
+                                Menu List If Required
+                -->
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-save="" ng-repeat-start="listData in vm.list | orderBy:vm.sortType:vm.sortReverse"
+                ng-click="vm.toggleInnerTable('child-level1-{{$index}}',$event,listData.id,vm.list,vm.list.indexOf(listData),1);vm.refcontroller.detailView(listData,$event)">
+
+                <td ng-style="::vm.setStyleLevel1()" ng-repeat="header in vm.header.level1" class="table-td-level1">
+
+                    <label ng-click="">{{header.children.length}}</label>
+
+                    <label ng-if="header.field == 'title'"
+                           ng-class="{true:'icon-toggle'}[listData.children > 0 || listData.children.length > 0]">{{listData[header.field]}}</label>
+                    <label ng-if="header.type == 'status'" style="display: inline-block;">
+                        <md-switch style="margin-left: 0;" aria-label="Warn Switch"
+                                   ng-click="$event.stopPropagation();"
+                                   ng-change="header.function($event,listData)"
+                                   class="md-primary" ng-model="listData[header.statusKey]">
+                        </md-switch>
+                    </label>
+
+
+                    <!--Font Icons-->
+                    <label ng-if="header.type == 'font-icon' && header.display == 'true-false'">
+                        <i ng-if="listData[header.field] != '0'" ng-class="header.class" class="fa"
+                           aria-hidden="true"></i>
+                        <i ng-if="listData[header.field] == '0' " ng-class="header.class" class="fa" aria-hidden="true"
+                           style="color: #c1c1c1;"></i>
+                    </label>
+
+                    <label ng-if="header.type == 'font-icon' && header.display == 'true-only'">
+                        <i ng-if="listData[header.field] == '1' " ng-class="header.class" class="fa"
+                           aria-hidden="true"></i>
+                    </label>
+
+                    <label ng-if="header.field != 'name' && header.field != 'title' && header.type != 'status' && header.type != 'font-icon' && header.type != 'row-menu'">{{listData[header.field]}}</label>
+                    <label ng-if=" header.type =='display_registered_by_in_created_by' && header.field == 'created_at'">
+                        {{listData['registered_by']}}
+                    </label>
+
+                    <label ng-if="header.type == 'row-menu'" style="text-align: right;">
+
+                        <md-menu style="margin-right: 25%;">
+
+                            <md-button class="widget-button md-icon-button"
+                                       ng-click="$mdOpenMenu();$event.stopPropagation();header.object.click($event,listData)"
+                                       aria-label="open menu">
+                                <md-icon md-font-icon="{{header.object.icon}}"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+
+                                <md-menu-item ng-repeat="item in header.object.items">
+                                    <md-button ng-click="item.click($event,listData)">
+                                        <md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>
+                                        <span translate>{{::item.title}}</span>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+                        </md-menu>
+
+                    </label>
+
+                    <label ng-if="header.type == 'dynamic-row-menu'" style="text-align: right;">
+
+                        <md-menu style="margin-right: 25%;">
+
+                            <md-button class="widget-button md-icon-button"
+                                       ng-click="$mdOpenMenu();$event.stopPropagation();header.object.click($event,listData)"
+                                       aria-label="open menu">
+                                <md-icon md-font-icon="{{header.object.icon}}"></md-icon>
+                            </md-button>
+
+
+                            <md-menu-content width="3">
+
+                                <md-menu-item ng-repeat="item in vm.refcontroller.getDynamicMenu(listData)">
+                                    <md-button ng-click="item.click($event,listData)">
+                                        <md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>
+                                        <span translate>{{::item.title}}</span>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+                        </md-menu>
+
+                    </label>
+
+                </td>
+            </tr>
+
+
+            <!--Level 2 Table-->
+            <tr ng-repeat-end ng-if="listData.children > 0 || listData.children.length"
+                id="child-level1-{{$index}}"
+                class="hidden inner-table">
+                <td colspan="100%" style="background: #ffffff; padding: 0px;">
+
+                    <md-data-table-container>
+                        <table md-data-table class="md-primary md-data-table" md-progress="">
+                            <thead>
+                            <tr>
+                                <th ng-style="::vm.setStyleLevel2()" name="{{::header.label}}"
+                                    ng-repeat="header in ::vm.header.level2"
+                                    class="order close table-th-level2"
+                                    ng-click="vm.toggleIconOrderBy($event); vm.sortType2='{{::header.field}}'; vm.sortReverse2 = !vm.sortReverse2">
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr ng-repeat-start="object in listData.children | orderBy:vm.sortType2:vm.sortReverse2"
+                                ng-click="vm.toggleInnerTable('child-level-{{object.id}}',$event,object.id,listData.children,listData.children.indexOf(object),2);">
+
+
+                                <td ng-style="::vm.setStyleLevel2()" ng-repeat="header in  vm.header.level2"
+                                    class="table-td-level2">
+                                    <label ng-if="header.field == 'name'"
+                                           ng-class="{true:'icon-toggle'}[object.children > 0 ||object.children.length > 0]">{{object[header.field]}}</label>
+                                    <label ng-if="header.type == 'status'" style="display: inline-block;">
+                                        <md-switch style="margin-left: 0;" aria-label="Warn Switch"
+                                                   ng-click="$event.stopPropagation();"
+                                                   ng-change="vm.toggleSwitch($event,object)"
+                                                   class="md-primary" ng-model="object[header.statusKey]">
+                                        </md-switch>
+                                    </label>
+                                    <label ng-if="header.field != 'name' && header.type != 'status'">{{object[header.field]}}</label>
+                                    <label ng-if="header.type == 'row-menu'" style="text-align: right;">
+
+                                        <md-menu style="margin-right: 25%;">
+
+                                            <md-button class="widget-button md-icon-button"
+                                                       ng-click="$mdOpenMenu();$event.stopPropagation()"
+                                                       aria-label="open menu">
+                                                <md-icon md-font-icon="{{header.object.icon}}"></md-icon>
+                                            </md-button>
+
+                                            <md-menu-content width="3">
+
+                                                <md-menu-item ng-repeat="item in header.object.items">
+                                                    <md-button
+                                                            ng-click="item.click($event,object,vm.list.indexOf(listData))">
+                                                        <md-icon ng-if="::item.icon"
+                                                                 md-font-icon="{{::item.icon}}"></md-icon>
+                                                        <span translate>{{::item.title}}</span>
+                                                    </md-button>
+                                                </md-menu-item>
+
+                                            </md-menu-content>
+
+                                        </md-menu>
+                                    </label>
+                                </td>
+                            </tr>
+
+                            <!--Level 3-->
+                            <tr ng-repeat-end ng-if="object.children.length || object.children >0"
+                                id="child-level-{{object.id}}"
+                                class="hidden inner-table">
+                                <td colspan="100%" style="background: #ffffff; padding: 0px;">
+
+
+                                    <md-data-table-container>
+                                        <table md-data-table class="md-primary md-data-table" md-progress="">
+                                            <thead>
+                                            <tr>
+                                                <th ng-style="::vm.setStyleLevel3()" name="{{::header.label}}"
+                                                    ng-repeat="header in ::vm.header.level3"
+                                                    class="order close table-th-level3"
+                                                    ng-click="vm.toggleIconOrderBy($event); vm.sortType='{{::header.field}}'; vm.sortReverse3 = !vm.sortReverse3"></th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                            <tr ng-repeat-start="childObject in object.children | orderBy:vm.sortType3:vm.sortReverse3"
+                                                ng-click="vm.toggleInnerTable('child-level-{{object.id}}',$event,object.id,object.children,object.children.indexOf(object),3)">
+
+
+                                                <td ng-style="::vm.setStyleLevel3()"
+                                                    ng-repeat="header in  vm.header.level3"
+                                                    class="table-td-level3">
+
+                                                    <label ng-if="header.field != 'type' && header.type != 'font-icon'">
+                                                        {{childObject[header.field]}}
+                                                    </label>
+                                                    <label ng-if="header.field == 'type'"
+                                                           style="display: inline-block;">
+                                                        <md-switch style="margin-left: 0;" aria-label="Warn Switch"
+                                                                   ng-click="$event.stopPropagation();"
+                                                                   ng-change="header.function($event,childObject)"
+                                                                   class="md-primary"
+                                                                   ng-model="childObject[header.statusKey]">
+                                                        </md-switch>
+                                                    </label>
+                                                    <label ng-if="header.type == 'row-menu'" style="text-align: right;">
+
+                                                        <md-menu style="margin-right: 25%;">
+
+                                                            <md-button class="widget-button md-icon-button"
+                                                                       ng-click="$mdOpenMenu();$event.stopPropagation()"
+                                                                       aria-label="open menu">
+                                                                <md-icon
+                                                                        md-font-icon="{{header.object.icon}}"></md-icon>
+                                                            </md-button>
+
+                                                            <md-menu-content width="3">
+
+                                                                <md-menu-item ng-repeat="item in header.object.items">
+                                                                    <md-button
+                                                                            ng-click="item.click($event,childObject,listData.children.indexOf(object),vm.list.indexOf(listData))">
+                                                                        <md-icon ng-if="::item.icon"
+                                                                                 md-font-icon="{{::item.icon}}"></md-icon>
+                                                                        <span translate>{{::item.title}}</span>
+                                                                    </md-button>
+                                                                </md-menu-item>
+
+                                                            </md-menu-content>
+
+                                                        </md-menu>
+
+                                                    </label>
+                                                </td>
+                                            </tr>
+
+                                            <tr ng-repeat-end="object.children.length"
+                                                id=""
+                                                class="hidden inner-table">
+                                                <td colspan="100%" style="background: #ffffff; padding: 0px;">
+
+
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </md-data-table-container>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-data-table-container>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </md-data-table-container>
+
+
+    <md-data-table-pagination md-limit="vm.refcontroller.query.limit" md-page="vm.refcontroller.query.page"
+                              md-total="{{vm.refcontroller.query.total}}"
+                              md-trigger="vm.refcontroller.onPageChange">
+    </md-data-table-pagination>
+
+</div>

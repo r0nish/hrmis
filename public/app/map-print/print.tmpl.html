@@ -1,0 +1,87 @@
+<div class="row card-header-bar white-text custom-primary-color">
+
+    <div class="col s10">
+        <h2>Map View</h2>
+    </div>
+
+    <div class="col s1">
+
+        <i ng-click="vm.printDiv()"
+           class="waves-effect material-icons small ">print</i>
+
+    </div>
+
+    <div class="col s1">
+        <!--go back to previous stage-->
+
+
+        <i ng-click="vm.hidePrintView()"
+           class="waves-effect material-icons small ">cancel</i>
+
+    </div>
+
+</div>
+
+
+
+<div id="map-print" class="print-content" style="overflow: visible"  class="card no-padding" style="position: relative">
+
+    <div ng-if="vm.headerTitle != '' " id="print-mode-title" class="row">
+        {{vm.headerTitle}}
+    </div>
+
+    <div class="card-content no-padding" style="margin-bottom: 10px">
+
+        <ng-map id="print-map" zoom-to-include-markers="true" default-style="false" lazy-init="true"
+                style="height:500px" geo-fallback-center="27.7172, 85.3240" zoom="3" map-initialized="vm.mapCallBack()">
+
+
+            <!--for assigned Outlets-->
+
+                <div sly-repeat="outlet in vm.data" sly-prevent-evaluation-when-hidden>
+
+                    <custom-marker
+                                   id="custom-marker-{{outlet.id_retail_outlet}}"
+                                   draggable="true"
+                                   icon="{ url: 'images/maps/blue_marker.png' }"
+                                   position="{{outlet.latitude}},{{outlet.longitude}}">
+
+                        <div style="background: white; color:black ; padding: 0px 1px; border: 2px solid green ; font-weight: bold">
+                            {{outlet.reference_id}}
+                        </div>
+                    </custom-marker>
+
+                </div>
+
+        </ng-map>
+    </div>
+
+<!--    <div class="row card-header-bar" style="background-color: inherit">
+
+        <div class="col s12">
+            <h2>Outlet List</h2>
+        </div>
+
+    </div>-->
+
+
+
+        <div id="route-outlet-list" class="flex-column">
+
+        <div class="row"  sly-repeat="rows in vm.chunkData" style="margin: 10px 0px 15px 0px">
+            <div class="col s3 " ng-repeat="outlet in rows">
+                <span style="display: block" class="hide-overflow-text">{{outlet.reference_id}}. {{outlet.id_retail_outlet}}</span>
+                <span style="display: block;" class="hide-overflow-text">{{outlet.retailoutlet_title}}</span>
+                <span style="display: block" class="hide-overflow-text">{{outlet.contact_number1}} , {{outlet.contact_number2}}</span>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>

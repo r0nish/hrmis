@@ -1,0 +1,91 @@
+<div class="row custom-grid">
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+        <li>
+            <div class="row grid-header-bar no-margin">
+
+                <div class="col s4 no-margin" ng-click="vm.assignSortType('user_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'user_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>User</span>
+                </div>
+                <div class="col s4 no-margin" ng-click="vm.assignSortType('route_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'route_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Route</span>
+                </div>
+                <div class="col s4 no-margin" ng-click="vm.assignSortType('town_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'town_title'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Town</span>
+                </div>
+                <div class="col s3 no-margin" ng-click="vm.assignSortType('distributor_title')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'total_outlets'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Distributor</span>
+                </div>
+                <div class="col s1 halign-wrapper valign-wrapper no-margin">
+                    <i style="display: inline-block; padding: 5px; border-radius: 50%;"
+                       class="tiny material-icons dropdown-button"
+                       ng-click="vm.downloadData();">file_download</i>
+                </div>
+
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="activeDse in vm.objectList">
+
+            <div class="collapsible-header" ng-click="vm.getSuccessfulDSEVisit(activeDse)">
+                <div class="row collapsible-header-content">
+                    <div class="col s4 no-margin" >
+                        {{activeDse.user_title}}
+                    </div>
+                    <div class="col s4 no-margin" >
+                        {{activeDse.route_title}}
+                    </div>
+                    <div class="col s4 no-margin" >
+                        {{activeDse.town_title}}
+                    </div>
+                    <div class="col s3 no-margin">
+                        {{activeDse.distributor_title}}
+                    </div>
+                    <div class="col s1" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible-body">
+                <div class="grid-header-bar row">
+                    <div class="col s12 row no-margin">
+                        <div class="col s3">
+                            S.No
+                        </div>
+                        <div class="col s6">
+                            Retail Outlet
+                        </div>
+                        <div class="col s3">
+                            Distributor
+                        </div>
+                    </div>
+                </div>
+                <div class="row" sly-repeat="retailOutlet in activeDse.children" style="padding: 0 2rem">
+                    <div class="col s3">
+                        {{$index+1}}
+                    </div>
+                    <div class="col s6 cursor-pointer" ng-click="vm.controller.detailView(retailOutlet)">
+                        <span>{{retailOutlet.retail_outlet_title}}</span>
+                    </div>
+                    <div class="col s3">
+                        <span>{{retailOutlet.distributor_title}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+
+        <li>
+            <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+        </li>
+
+    </ul>
+</div>

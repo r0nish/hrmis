@@ -1,0 +1,88 @@
+<div class="row custom-grid">
+
+    <ul class="collapsible white-background" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+        <li>
+            <div class="row grid-header-bar no-margin">
+                <div class="col s4" ng-if="vm.listHeader.indexOf('user_name') == -1" ng-click="vm.assignSortType('user_name')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'user_name'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>User Name</span>
+                </div>
+                <div class="col s4" ng-if="vm.listHeader.indexOf('user_group_name') == -1"  ng-click="vm.assignSortType('user_group_name')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'user_group_name'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>User Group</span>
+                </div>
+                <div class="col s4" ng-if="vm.listHeader.indexOf('geo_location') == -1" ng-click="vm.assignSortType('geo_location')">
+                    <span class="sortOrder" ng-show="vm.sortType === 'geo_location'"
+                          ng-class="{reverse: vm.reverse}"></span>
+                    <span>Geographic Location</span>
+                </div>
+            </div>
+        </li>
+
+        <li bindonce sly-repeat="userLocation in vm.objectList">
+
+            <div class="collapsible-header">
+
+                <div class="row collapsible-header-content">
+
+                    <div class="col s4" ng-if="vm.listHeader.indexOf('user_name') == -1">
+                        {{userLocation.user_name}}
+                    </div>
+
+                    <div class="col s4" ng-if="vm.listHeader.indexOf('user_group_name') == -1">
+                        {{userLocation.user_group_name}}
+                    </div>
+
+                    <div class="col s4" ng-if="vm.listHeader.indexOf('geo_location') == -1">
+                        {{userLocation.geo_location}}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </li>
+
+        <li>
+            <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="fixed-action-btn modal-wrapper" style="bottom: 45px; right: 24px;">
+
+    <a data-target="add-dialog" ng-click=" vm.activateDataToCreateUserLocation();"
+       class="waves-effect waves-dark btn-floating btn-large custom-primary-color red darken-2 modal-trigger">
+        <i class="large material-icons">add</i>
+    </a>
+
+</div>
+
+<!-- Add Dialog -->
+<div id="add-dialog" class="modal dialog-box-element">
+
+    <div ng-include=" 'app/configurations/user/userLocation/create-user-location-form.tmpl.html' "
+         ng-controller="userLocationDialogController as vm"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

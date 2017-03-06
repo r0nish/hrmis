@@ -1,0 +1,82 @@
+<div class="col s12 tabs-view">
+    <div class="tab-content col s12">
+
+        <div class="card-panel row no-margin white-text card-header-bar custom-primary-color" style="padding: 15px">
+            <h2 class="no-margin">Country</h2>
+        </div>
+
+        <ul class="card black-text collapsible margin-top-0" data-collapsible="accordion" sly-prevent-evaluation-when-hidden>
+
+            <li class="card-content row no-margin page-title grid-header-bar" style="padding: 5px 1rem">
+                <div class="col s1 no-margin">
+                    <span style="font-weight: bold">ID</span>
+                </div>
+                <div class="col s2 no-margin">
+                    <span>Description</span>
+                </div>
+                <div class="col s2 no-margin">
+                    <span>Status</span>
+                </div>
+                <div class="col s1 no-margin">
+                </div>
+
+            </li>
+
+            <li bindonce sly-repeat="country in vm.objectList">
+
+                <div class="collapsible-header row no-margin" style="cursor: text">
+                    <div class="col s1 no-margin">
+                        <span>{{country.id_country}}</span>
+                    </div>
+
+                    <div class="col s3 no-margin">
+                        <span>{{country.desc}}</span>
+                    </div>
+
+                    <div class="col s2 no-margin">
+                        <span>{{country.status}}</span>
+                    </div>
+
+                    <div class="col s3 no-margin">
+
+                    </div>
+                    <div class="col s1 no-margin" ng-click="$event.stopPropagation();">
+                        <div class="valign-wrapper relative-position">
+
+                            <i data-activates="country-dropdown-{{country.id_country}}"
+                               class="tiny material-icons dropdown-button">more_vert</i>
+
+                            <ul id="country-dropdown-{{country.id_country}}" class="dropdown-content">
+                                <li>
+                                    <a data-target="edit-country-{{country.id_country}}" class="modal-trigger"
+                                        ng-click="vm.setEditData(country)">Edit</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                 <!--Edit Dialog-->
+                <div id="edit-country-{{country.id_country}}" class="modal">
+                    <div ng-include=" 'app/configurations/country/add-country.tmpl.html' "></div>
+                </div>
+            </li>
+
+            <li>
+                <div ng-include=" 'app/foundation/pagination.tmpl.html' "></div>
+            </li>
+        </ul>
+
+        <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+            <a data-target="add-dialog" class="btn-floating custom-primary-color red darken-2 btn-large waves-effect waves-dark modal-trigger">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
+
+        <!-- Add Dialog -->
+        <div id="add-dialog" class="modal dialog-box-element">
+            <div ng-include="'app/configurations/country/add-country.tmpl.html'"></div>
+        </div>
+
+    </div>
+</div>

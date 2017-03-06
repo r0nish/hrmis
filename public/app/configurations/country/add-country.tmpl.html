@@ -1,0 +1,28 @@
+<div class="modal-content card no-margin border-bottom padding-bottom-0">
+
+    <div ng-if="vm.addItem.type != 'edit'">
+        <span class="card-title">{{vm.addItem.type}}</span>
+    </div>
+
+    <div class="row no-margin card-content">
+        <form name="task-form" novalidate>
+            <div class="row no-margin">
+                <div class="col s6">
+                    <label>Country</label>
+                    <input type="text" ng-model="vm.addItem.countryTitle"
+                           ng-minlength="3" ng-maxlength="35" required>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card modal-footer no-margin no-card-style">
+    <a ng-click="vm.countryAddItem()"
+       class=" modal-action modal-close waves-effect btn-flat">OK
+    </a>
+    <a ng-click="vm.resetAddItem()"
+       class=" modal-action modal-close waves-effect btn-flat">Cancel
+    </a>
+</div>
